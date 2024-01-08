@@ -1,7 +1,6 @@
 package com.skilldistillery.tabletop.entities;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -13,10 +12,10 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-class SessionTest {
+class AdventurerTest {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Session session;
+	private Adventurer adventurer;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -31,20 +30,34 @@ class SessionTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		session = new Session();
+		adventurer = new Adventurer();
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		session = null;
+		adventurer = null;
 	}
 
 	@Test
-	void test_Session_basic_mapping() {
-		session = em.find(Session.class, 1);
-		assertNotNull(session);
-		assertEquals("Spelljammer", session.getCampaign());
+	void test_Adventurer_basic_mapping() {
+		adventurer = em.find(Adventurer.class, 1);
+		assertNotNull(adventurer);
+		assertEquals("Uthjack", adventurer.getName());
+	}
+	
+	@Test
+	void test_Adventurer_Player_ManyToOne_mapping() {
+		adventurer = em.find(Adventurer.class, 1);
+		assertNotNull(adventurer.getPlayer());
+		assertEquals("Jacob", adventurer.getPlayer().getFirstName());
+	}
+
+	@Test
+	void test_Adventurer_Game_ManyToOne_mapping() {
+		adventurer = em.find(Adventurer.class, 1);
+		assertNotNull(adventurer.getGame());
+		assertEquals("Dungeons & Dragons", adventurer.getGame().getName());
 	}
 
 }
