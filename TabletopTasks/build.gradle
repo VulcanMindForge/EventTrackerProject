@@ -25,6 +25,13 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
+war {
+  // Gradle will replace the variable archivesBaseName
+  // with our app name, as defined in settings.gradle
+  archiveFileName = "${archivesBaseName}.war"
+  destinationDirectory = file("../")     // Project workspace directory
+}
+
 tasks.named('test') {
 	useJUnitPlatform()
 }
