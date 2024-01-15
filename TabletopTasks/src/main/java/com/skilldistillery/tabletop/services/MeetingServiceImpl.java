@@ -41,8 +41,6 @@ public class MeetingServiceImpl implements MeetingService {
 		editedMeeting.setLocation(meeting.getLocation());
 		editedMeeting.setStartTime(meeting.getStartTime());
 		editedMeeting.setCampaign(meeting.getCampaign());
-		editedMeeting.setStoryteller(meeting.getStoryteller());
-		editedMeeting.setPlayers(meeting.getPlayers());
 		return meetingRepo.saveAndFlush(editedMeeting);
 	}
 

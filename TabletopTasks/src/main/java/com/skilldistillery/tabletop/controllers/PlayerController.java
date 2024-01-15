@@ -38,6 +38,15 @@ public class PlayerController {
 		}
 		return player;
 	}
+	
+	@GetMapping("players/username/{username}")
+	public Player playerById(@PathVariable("username") String username, HttpServletResponse resp) {
+		Player player = playerServ.findByUsernameLike(username);
+		if (player == null) {
+			resp.setStatus(404);
+		}
+		return player;
+	}
 
 	@PostMapping("players")
 	public Player createPlayer(@RequestBody Player player, HttpServletResponse resp, HttpServletRequest req) {

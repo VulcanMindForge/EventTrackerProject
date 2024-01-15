@@ -24,6 +24,8 @@ private String firstName;
 @Column(name = "last_name")
 private String lastName;
 private String address;
+private String username;
+private String password;
 
 @OneToMany(mappedBy = "player")
 @JsonIgnore
@@ -31,7 +33,7 @@ private List<Adventurer> adventurers;
 
 @ManyToMany(mappedBy = "players")
 @JsonIgnore
-private List<Meeting> meetings;
+private List<Campaign> campaigns;
 
 public Player() {}
 
@@ -63,28 +65,28 @@ public void removeAdventurer(Adventurer adventurer) {
 	}
 }
 
-public List<Meeting> getMeetings() {
-	return meetings;
+public List<Campaign> getCampaigns() {
+	return campaigns;
 }
 
-public void setMeetings(List<Meeting> meetings) {
-	this.meetings = meetings;
+public void setCampaigns(List<Campaign> campaigns) {
+	this.campaigns = campaigns;
 }
 
-public void addMeeting(Meeting meeting) {
-	if (meetings == null) {
-		meetings = new ArrayList<>();
+public void addCampaign(Campaign campaign) {
+	if (campaigns == null) {
+		campaigns = new ArrayList<>();
 	}
-	if (!meetings.contains(meeting)) {
-		meetings.add(meeting);
-		meeting.addPlayer(this);
+	if (!campaigns.contains(campaign)) {
+		campaigns.add(campaign);
+		campaign.addPlayer(this);
 	}
 }
 
-public void removeMeeting(Meeting meeting) {
-	if (meetings != null && meetings.contains(meeting)) {
-		meetings.remove(meeting);
-		meeting.removePlayer(this);
+public void removeCampaign(Campaign campaign) {
+	if (campaigns != null && campaigns.contains(campaign)) {
+		campaigns.remove(campaigns);
+		campaign.removePlayer(this);
 	}
 }
 
@@ -120,6 +122,24 @@ public void setAddress(String address) {
 	this.address = address;
 }
 
+
+
+public String getUsername() {
+	return username;
+}
+
+public void setUsername(String username) {
+	this.username = username;
+}
+
+public String getPassword() {
+	return password;
+}
+
+public void setPassword(String password) {
+	this.password = password;
+}
+
 @Override
 public int hashCode() {
 	return Objects.hash(id);
@@ -140,7 +160,8 @@ public boolean equals(Object obj) {
 @Override
 public String toString() {
 	return "Player [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", address=" + address
-			+ ", adventurers=" + adventurers + ", meetings=" + meetings + "]";
+			+ ", username=" + username + ", password=" + password + ", adventurers=" + adventurers + ", campaigns="
+			+ campaigns + "]";
 }
 
 

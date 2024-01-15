@@ -43,28 +43,6 @@ class MeetingTest {
 	void test_Meeting_basic_mapping() {
 		meeting = em.find(Meeting.class, 1);
 		assertNotNull(meeting);
-		assertEquals("Spelljammer", meeting.getCampaign());
 	}
 	
-	@Test
-	void test_Meeting_Player_OnetoOne_mapping () {
-		meeting = em.find(Meeting.class, 1);
-		assertNotNull(meeting.getStoryteller());
-		assertEquals("Jacob", meeting.getStoryteller().getFirstName());
-	}
-	
-	@Test
-	void test_Meeting_Game_ManytoOne_mapping () {
-		meeting = em.find(Meeting.class, 1);
-		assertNotNull(meeting.getGame());
-		assertEquals("Dungeons & Dragons", meeting.getGame().getName());
-	}
-	
-	@Test
-	void test_Meeting_Player_ManytoMany_mapping () {
-		meeting = em.find(Meeting.class, 1);
-		assertNotNull(meeting.getPlayers());
-		assertTrue(meeting.getPlayers().size() > 0);
-	}
-
 }

@@ -50,6 +50,7 @@ public class AdventurerServiceImpl implements AdventurerService {
 		adventToEdit.setCharacterClass(adventurer.getCharacterClass());
 		adventToEdit.setLevel(adventurer.getLevel());
 		adventToEdit.setPlayer(adventurer.getPlayer());
+		adventToEdit.setCampaign(adventurer.getCampaign());
 		return adventRepo.saveAndFlush(adventToEdit);
 	}
 

@@ -49,7 +49,7 @@ class PlayerTest {
 	}
 	
 	@Test
-	void test_Adventurer_mapping_ManyToOne_mapping() {
+	void test_Adventurer_mapping_OneToMany_mapping() {
 		player = em.find(Player.class, 1);
 		assertNotNull(player);
 		assertEquals("Jacob", player.getFirstName());
@@ -58,12 +58,12 @@ class PlayerTest {
 	}
 	
 	@Test
-	void test_Player_Meeting_ManyToMany_mapping() {
+	void test_Campaign_Player_ManyToMany_mapping() {
 		player = em.find(Player.class, 1);
 		assertNotNull(player);
 		assertEquals("Jacob", player.getFirstName());
-		assertNotNull(player.getMeetings());
-		assertTrue(player.getMeetings().size() > 0);
+		assertNotNull(player.getCampaigns());
+		assertTrue(player.getCampaigns().size() > 0);
 	}
 
 }

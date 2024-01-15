@@ -1,8 +1,6 @@
 package com.skilldistillery.tabletop.entities;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -14,10 +12,10 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-class GameTest {
+class CampaignTest {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Game game;
+	private Campaign campaign;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -32,26 +30,27 @@ class GameTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		game = new Game();
+		campaign = new Campaign();
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		game = null;
+		campaign = null;
 	}
 
 	@Test
 	void test_Game_basic_mapping() {
-		game = em.find(Game.class, 1);
-		assertNotNull(game);
-		assertEquals("Dungeons & Dragons", game.getName());
+		campaign = em.find(Campaign.class, 1);
+		assertNotNull(campaign);
+		assertEquals("Spelljammer Bebop", campaign.getName());
 	}
 	
 	@Test
-	void test_Game_Campaign_OneToMany() {
-		game = em.find(Game.class, 1);
-		assertNotNull(game);
-		assertTrue(game.getCampaigns().size() > 0);
+	void test_Game_Players_ManyToMany_mapping() {
+		campaign = em.find(Campaign.class, 1);
+		assertNotNull(campaign);
+		assertNotNull(campaign.getPlayers());
+		assertTrue(campaign.getPlayers().size() > 0);
 	}
 }

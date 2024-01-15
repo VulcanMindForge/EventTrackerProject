@@ -25,8 +25,8 @@ public class Adventurer {
 	private Player player;
 
 	@ManyToOne
-	@JoinColumn(name = "game_id")
-	private Game game;
+	@JoinColumn(name = "campaign_id")
+	private Campaign campaign;
 
 	public Adventurer() {
 	}
@@ -71,12 +71,12 @@ public class Adventurer {
 		this.player = player;
 	}
 
-	public Game getGame() {
-		return game;
+	public Campaign getCampaign() {
+		return campaign;
 	}
 
-	public void setGame(Game game) {
-		this.game = game;
+	public void setCampaign(Campaign campaign) {
+		this.campaign = campaign;
 	}
 
 	@Override
@@ -99,7 +99,7 @@ public class Adventurer {
 	@Override
 	public String toString() {
 		return "Adventurer [id=" + id + ", name=" + name + ", characterClass=" + characterClass + ", level=" + level
-				+ ", player=" + player + ", game=" + game + "]";
+				+ ", player=" + player + ", campaign=" + campaign + "]";
 	}
 
 }

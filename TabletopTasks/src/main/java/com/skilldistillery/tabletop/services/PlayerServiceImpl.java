@@ -53,5 +53,19 @@ public Boolean removePlayer(int playerId) {
 	return false;
 }
 
+@Override
+public Player findByUsernameLike(String username) {
+	Player player;
+//	username =  username + "%";
+	if (playerRepo.findByUsernameLike(username) != null) {
+		player = playerRepo.findByUsernameLike(username);
+	} else {
+		player = null;
+	}
+	return player;
+}
+
+
+
 
 }

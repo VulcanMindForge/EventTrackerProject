@@ -12,5 +12,5 @@ public interface PlayerService {
 	Player createPlayer(Player player);
 	Player editPlayer(int playerId, Player player);
 	Boolean removePlayer(int playerId);
-
+	Player findByUsernameLike(String username);
 }

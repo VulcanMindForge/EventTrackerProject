@@ -24,45 +24,12 @@ private int id;
 private String location;
 @Column(name="start_time")
 private LocalDateTime startTime;
-private String campaign;
-@OneToOne
-@JoinColumn(name = "storyteller")
-private Player storyteller;
 
 @ManyToOne
-@JoinColumn(name = "game_id")
-private Game game;
-
-@ManyToMany
-@JoinTable(name = "meeting_player", joinColumns = @JoinColumn(name = "meeting_id"), inverseJoinColumns = @JoinColumn(name = "player_id"))
-private List<Player> players;
+@JoinColumn(name = "campaign_id")
+private Campaign campaign;
 
 public Meeting () {}
-
-public List<Player> getPlayers() {
-	return players;
-}
-
-public void setPlayers(List<Player> players) {
-	this.players = players;
-}
-
-public void addPlayer(Player player) {
-	if(players == null) {
-		players = new ArrayList<>();
-	}
-	if (!players.contains(player)) {
-		players.add(player);
-		player.addMeeting(this);
-	}
-}
-
-public void removePlayer(Player player) {
-	if(players != null && players.contains(player)) {
-		players.remove(player);
-		player.removeMeeting(this);
-	}
-}
 
 public int getId() {
 	return id;
@@ -88,28 +55,12 @@ public void setStartTime(LocalDateTime startTime) {
 	this.startTime = startTime;
 }
 
-public String getCampaign() {
+public Campaign getCampaign() {
 	return campaign;
 }
 
-public void setCampaign(String campaign) {
+public void setCampaign(Campaign campaign) {
 	this.campaign = campaign;
-}
-
-public Player getStoryteller() {
-	return storyteller;
-}
-
-public void setStoryteller(Player storyteller) {
-	this.storyteller = storyteller;
-}
-
-public Game getGame() {
-	return game;
-}
-
-public void setGame(Game game) {
-	this.game = game;
 }
 
 @Override
@@ -131,9 +82,7 @@ public boolean equals(Object obj) {
 
 @Override
 public String toString() {
-	return "Meeting [id=" + id + ", location=" + location + ", startTime=" + startTime + ", campaign=" + campaign
-			+ ", storyteller=" + storyteller + ", game=" + game + "]";
+	return "Meeting [id=" + id + ", location=" + location + ", startTime=" + startTime + ", campaign=" + campaign;
 }
-
 
 }

@@ -54,10 +54,10 @@ class AdventurerTest {
 	}
 
 	@Test
-	void test_Adventurer_Game_ManyToOne_mapping() {
+	void test_Adventurer_Campaign_ManyToOne_mapping() {
 		adventurer = em.find(Adventurer.class, 1);
-		assertNotNull(adventurer.getGame());
-		assertEquals("Dungeons & Dragons", adventurer.getGame().getName());
+		assertNotNull(adventurer.getCampaign());
+		assertEquals("Jacob", adventurer.getCampaign().getStoryteller().getFirstName());
 	}
 
 }

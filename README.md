@@ -33,12 +33,18 @@ Access the site and respond to the prompts to search the database.
 - Implemented Services, Controllers, and Repositories
 - Implemented CRUD operations to be access through REST API
 - Tested via postman and verified all Rest Endpoint working
+- Added a front end
+- dynamically create tables from mySQL data
+
 
 # Next Steps
-- Add search query functionality
+- implement edit functionality
+- implement
 
 # Lessons to research
 - HTTP status codes
+- JS Fetch requests
+- fat arrow functions
 
 # Rest Table
 | Http Verb | URI                                             | Request Body                      | Response Body                            | Status Codes |

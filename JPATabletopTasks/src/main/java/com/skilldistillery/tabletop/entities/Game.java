@@ -19,76 +19,13 @@ public class Game {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
-	private Double version;
+	private String description;
 	@Column(name = "image_url")
 	private String imageURL;
-
+	
 	@OneToMany(mappedBy = "game")
 	@JsonIgnore
-	private List<Adventurer> adventurers;
-
-	@OneToMany(mappedBy = "game")
-	@JsonIgnore
-	private List<Meeting> meetings;
-	
-	public Game() {
-	}
-	
-	public List<Meeting> getMeetings() {
-		return meetings;
-	}
-
-	public void setMeetings(List<Meeting> meetings) {
-		this.meetings = meetings;
-	}
-
-	public void addMeeting(Meeting meeting) {
-		if (meetings == null) {
-			meetings = new ArrayList<>();
-		}
-		if (!meetings.contains(meeting)) {
-			meetings.add(meeting);
-			if (meeting.getGame() != null) {
-				meeting.getGame().removeMeeting(meeting);
-			}
-			meeting.setGame(this);
-		}
-	}
-
-	public void removeMeeting(Meeting meeting) {
-		if (meetings != null && meetings.contains(meeting)) {
-			meetings.remove(meeting);
-			meeting.setGame(null);
-		}
-	}
-
-	public List<Adventurer> getAdventurers() {
-		return adventurers;
-	}
-
-	public void setAdventurers(List<Adventurer> adventurers) {
-		this.adventurers = adventurers;
-	}
-
-	public void addAdventurer(Adventurer adventurer) {
-		if (adventurers == null) {
-			adventurers = new ArrayList<>();
-		}
-		if (!adventurers.contains(adventurer)) {
-			adventurers.add(adventurer);
-			if (adventurer.getGame() != null) {
-				adventurer.getGame().removeAdventurer(adventurer);
-			}
-			adventurer.setGame(this);
-		}
-	}
-
-	public void removeAdventurer(Adventurer adventurer) {
-		if (adventurers != null && adventurers.contains(adventurer)) {
-			adventurers.remove(adventurer);
-			adventurer.setGame(null);
-		}
-	}
+	private List<Campaign> campaigns;
 
 	public int getId() {
 		return id;
@@ -106,12 +43,12 @@ public class Game {
 		this.name = name;
 	}
 
-	public Double getVersion() {
-		return version;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setVersion(Double version) {
-		this.version = version;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getImageURL() {
@@ -122,6 +59,34 @@ public class Game {
 		this.imageURL = imageURL;
 	}
 
+	public List<Campaign> getCampaigns() {
+		return campaigns;
+	}
+
+	public void setCampaigns(List<Campaign> campaigns) {
+		this.campaigns = campaigns;
+	}
+	
+	public void addCampaign(Campaign campaign) {
+		if (campaigns == null) {
+			campaigns = new ArrayList<>();
+		}
+		if (!campaigns.contains(campaign)) {
+			campaigns.add(campaign);
+			if (campaign.getGame() != null) {
+				campaign.getGame().removeCampaign(campaign);
+			}
+			campaign.setGame(this);
+		}
+	}
+
+	public void removeCampaign(Campaign campaign) {
+		if (campaigns != null && campaigns.contains(campaign)) {
+			campaigns.remove(campaign);
+			campaign.setGame(this);
+		}
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -141,8 +106,9 @@ public class Game {
 
 	@Override
 	public String toString() {
-		return "Game [id=" + id + ", name=" + name + ", version=" + version + ", imageURL=" + imageURL
-				+ ", adventurers=" + adventurers + "]";
+		return "Game [id=" + id + ", name=" + name + ", version=" + description + ", imageURL=" + imageURL + ", campaigns="
+				+ campaigns + "]";
 	}
-
+	
+	
 }
