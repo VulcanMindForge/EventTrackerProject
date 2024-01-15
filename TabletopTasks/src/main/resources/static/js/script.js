@@ -124,7 +124,7 @@ function showLogin() {
 
 function loadGameInfo() {
 	let xhr = new XMLHttpRequest;
-	xhr.open('GET', '/api/games');
+	xhr.open('GET', 'api/games');
 
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState === 4) {
@@ -177,7 +177,7 @@ function displayGameInfo(games) {
 function loginPlayer() {
 	let username = login.username.value;
 	let xhr = new XMLHttpRequest;
-	xhr.open('GET', '/api/players/username/' + username);
+	xhr.open('GET', 'api/players/username/' + username);
 	console.log(username);
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState === 4) {
@@ -218,7 +218,7 @@ function addPlayer() {
 			};
 			
 		let xhr = new XMLHttpRequest();
-		xhr.open('POST', 'http://localhost:8085/api/players');
+		xhr.open('POST', 'api/players');
 		xhr.setRequestHeader('Content-type', 'application/JSON');
 
 		xhr.onreadystatechange = function() {
@@ -235,7 +235,7 @@ function addPlayer() {
 
 function loadMeetings() {
 	let xhr = new XMLHttpRequest();
-	xhr.open('GET', '/api/meetings');
+	xhr.open('GET', 'api/meetings');
 
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState === 4) {
@@ -304,7 +304,7 @@ function deleteMeeting(meetingId) {
 	if (confirmed) {
 		let xhr = new XMLHttpRequest;
 
-		xhr.open('DELETE', '/api/meetings/' + meetingId);
+		xhr.open('DELETE', 'api/meetings/' + meetingId);
 
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState === 4) {
@@ -329,7 +329,7 @@ function deleteMeeting(meetingId) {
 function loadAdventurers() {
 	let xhr = new XMLHttpRequest;
 
-	xhr.open('GET', '/api/players/' + currentUser.id + '/adventurers');
+	xhr.open('GET', 'api/players/' + currentUser.id + '/adventurers');
 
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState === 4) {
@@ -387,7 +387,7 @@ function deleteAdventurer(adventurerId) {
 	if (confirmed) {
 		let xhr = new XMLHttpRequest;
 
-		xhr.open('DELETE', '/api/players/' + currentUser.id + "/adventurers/" + adventurerId);
+		xhr.open('DELETE', 'api/players/' + currentUser.id + "/adventurers/" + adventurerId);
 
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState === 4) {
@@ -409,7 +409,7 @@ function deleteAdventurer(adventurerId) {
 
 function loadCampaigns() {
 	let xhr = new XMLHttpRequest;
-	xhr.open('GET', '/api/campaigns');
+	xhr.open('GET', 'api/campaigns');
 
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState === 4) {
@@ -449,6 +449,12 @@ function displayCampaigns(campaigns) {
 
 		actionCell.appendChild(editButton);
 	});
+}
+
+function addCampaign() {
+	let editCampDiv = document.getElementById("editCampaign");
+	editCampDiv.style.display = 'block';
+	
 }
 
 function displayError(errorMsg) {
