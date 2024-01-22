@@ -35,33 +35,11 @@
       <li><strong>Campaign:</strong> {{ selected.campaign?.name }}</li>
       <li><strong>Location:</strong> {{selected.location}}</li>
       <li><strong>Start Time:</strong> {{selected.startTime}}</li>
+      <li><strong></strong></li>
 
       <button class="btn btn-warning" (click)="setEditMeeting()">Edit</button>
       <button class="btn btn-primary" (click)="displayTable()">Back to List</button>
     </ul>
-  </div>
-  <div *ngIf="editMeeting">
-    <h2>Edit Meeting</h2>
-    <form class="input-group">
-      <ul>
-        <li>
-          <label class="form-label strong" for="editTask">Name: </label>
-          <input type="text" id="editTask" [(ngModel)]="editMeeting.campaign" name="editTask" />
-        </li>
-        <li>
-          <label class="form-label strong" for="editDescription">Location: </label>
-          <input type="text" id="editDescription" [(ngModel)]="editMeeting.location" name="editDescription" />
-        </li>
-        <li>
-          <label class="form-label strong" for="editCompleted">Start Time: </label>
-          <input type="checkbox" id="editCompleted" [(ngModel)]="editMeeting.startTime" name="editCompleted" />
-        </li>
-      </ul>
-    </form>
-    <div>
-      <button type="button" class="btn btn-warning" (click)="updateMeeting(editMeeting)">Save</button>
-      <button type="button" class="btn btn-primary" (click)="cancelEdit()">Cancel</button>
-    </div>
   </div>
 
 </div>
