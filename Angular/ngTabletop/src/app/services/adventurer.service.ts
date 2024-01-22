@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
 import { Adventurer } from '../models/adventurer.model';
 
@@ -47,11 +47,7 @@ export class AdventurerService {
   }
 
   update(advent: Adventurer): Observable<Adventurer> {
-    let headers = new HttpHeaders({
-      'Content-Type' : 'application/json',
-      'Access-Control-Allow-Origin': 'http://localhost:4205',
-    });
-    return this.http.put<Adventurer>(this.url + "/" + advent.id, advent, {headers}).pipe(
+    return this.http.put<Adventurer>(this.url + "/" + advent.id, advent).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(

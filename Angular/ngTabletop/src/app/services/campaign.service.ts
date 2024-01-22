@@ -9,7 +9,6 @@ import { Observable, catchError, throwError } from 'rxjs';
 })
 export class CampaignService {
 
-
   constructor(private http: HttpClient) { }
 
   private url = environment.baseUrl + 'api/campaigns';

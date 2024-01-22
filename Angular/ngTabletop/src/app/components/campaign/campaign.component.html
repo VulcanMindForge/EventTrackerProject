@@ -29,6 +29,9 @@
             <button class="btn btn-warning" (click)="displayCampaign(campaign)">Details</button>
           </td>
         </tr>
+        <tr class="text-center">
+          <td colspan="5"><button class="btn btn-danger" (click)="addCampaignToggle()">Add Campaign</button></td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -43,33 +46,83 @@
         <ul>
           <li *ngFor="let player of selected.players">{{player.firstName}} {{player.lastName}}</li>
         </ul>
-      </li>
+
       <button class="btn btn-warning" (click)="setEditCampaign()">Edit</button>
       <button class="btn btn-primary" (click)="displayTable()">Back to List</button>
     </ul>
   </div>
+
   <div *ngIf="editCampaign">
     <h2>Edit Campaign</h2>
-    <form class="input-group">
+    <form id="adventurerForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" [(ngModel)]="editCampaign.name" required>
+      <br>
+      <label for="storyteller">Storyteller:</label>
+      <select type="text" id="storyteller" name="storyteller" [(ngModel)]="editCampaign.storyteller">
+        <option *ngFor="let player of players" [ngValue]="player">{{player.firstName}} {{player.lastName}}</option>
+      </select>
+      <br>
+      <label for="game">Game:</label>
+      <select type="text" id="game" name="game" [(ngModel)]="editCampaign.game">
+        <option *ngFor="let game of games" [ngValue]="game">{{game.name}}</option>
+      </select>
+      <br>
+      <label for="campPlayers">Current Players:</label>
       <ul>
-        <li>
-          <label class="form-label strong" for="editTask">Name: </label>
-          <input type="text" id="editTask" [(ngModel)]="editCampaign.name" name="editTask" />
-        </li>
-        <li>
-          <label class="form-label strong" for="editDescription">Storyteller: </label>
-          <input type="text" id="editDescription" [(ngModel)]="editCampaign.storyteller" name="editDescription" />
-        </li>
-        <li>
-          <label class="form-label strong" for="editCompleted">Players: </label>
-          <input type="checkbox" id="editCompleted" [(ngModel)]="editCampaign.players" name="editCompleted" />
+        <li *ngFor="let player of editCampaign.players">{{player.firstName}} {{player.lastName}}
+          <button class="btn btn-danger" type="button" (click)="removePlayer(player)">Remove</button>
         </li>
       </ul>
-    </form>
-    <div>
-      <button type="button" class="btn btn-warning" (click)="updateCampaign(editCampaign)">Save</button>
-      <button type="button" class="btn btn-primary" (click)="cancelEdit()">Cancel</button>
-    </div>
+      <br>
+      <label for="players">Players:</label>
+      <ul>
+        <li *ngFor="let player of players">{{player.firstName}} {{player.lastName}}
+          <button type="button" class="btn btn-success" (click)="addPlayer(player)">Add Player</button>
+        </li>
+      </ul>
+
+      <div>
+        <button type="button" class="btn btn-warning" (click)="updateCampaign(editCampaign)">Save</button>
+        <button type="button" class="btn btn-primary" (click)="cancelEdit()">Cancel</button>
+      </div>
+  </form>
+  </div>
+
+  <div *ngIf="addCampaignDisplay">
+    <h2>Add Campaign</h2>
+    <form id="adventurerForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" [(ngModel)]="newCampaign.name" required>
+      <br>
+      <label for="storyteller">Storyteller:</label>
+      <select type="text" id="storyteller" name="storyteller" [(ngModel)]="newCampaign.storyteller">
+        <option *ngFor="let player of players" [ngValue]="player">{{player.firstName}} {{player.lastName}}</option>
+      </select>
+      <br>
+      <label for="game">Game:</label>
+      <select type="text" id="game" name="game" [(ngModel)]="newCampaign.game">
+        <option *ngFor="let game of games" [ngValue]="game">{{game.name}}</option>
+      </select>
+      <br>
+      <label for="campPlayers">Current Players:</label>
+      <ul>
+        <li *ngFor="let player of newCampaign.players">{{player.firstName}} {{player.lastName}}
+          <button class="btn btn-danger" type="button" (click)="removePlayerNew(player)">Remove</button>
+        </li>
+      </ul>
+      <br>
+      <label for="players">Players:</label>
+      <ul>
+        <li *ngFor="let player of players">{{player.firstName}} {{player.lastName}}
+          <button type="button" class="btn btn-success" (click)="addPlayerNew(player)">Add Player</button>
+        </li>
+      </ul>
+
+      <br>
+      <button class="btn btn-primary" type="button" (click)="addCampaign(newCampaign)">Create Campaign</button>
+      <button class="btn btn-warning" type="button" (click)="addCampaignToggle()">Back to List</button>
+  </form>
   </div>
 
 </div>

@@ -130,6 +130,7 @@ export class AdventurerComponent {
         next: (createdAdvent) => {
           this.adventurers.push(createdAdvent);
           this.newAdventurer = new Adventurer();
+          this.addAdventurerDisplay = false;
           this.reload();
         },
         error: (error) => {
