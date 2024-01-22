@@ -1,0 +1,23 @@
+
+<div id="gameTable" class="container">
+  <table class="table table-dark table-striped table-hover">
+    <thead class="table-dark">
+      <tr>
+        <td>id</td>
+        <td>name</td>
+        <td>description</td>
+        <td>image</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let game of games">
+        <td>{{game.id}}</td>
+        <td>{{game.name}}</td>
+        <td>{{game.description}}</td>
+        <td class="col md-4">
+          <img class="img-thumbnail" [src]="game.imageURL" alt="no image found"/>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

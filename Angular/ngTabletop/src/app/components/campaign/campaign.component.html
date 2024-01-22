@@ -1,0 +1,75 @@
+
+ <div class = "container">
+  <h1>Campaigns</h1>
+  <div class = "m-2 p-2"  *ngIf="!selected">
+    <table class="table table-dark table-striped table-hover">
+      <thead>
+        <tr>
+          <td><strong>Game</strong></td>
+          <td><strong>Name</strong></td>
+          <td><strong>Storyteller</strong></td>
+          <td><strong>Players</strong></td>
+          <td><strong>Actions</strong></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let campaign of campaigns" (click)="displayCampaign(campaign)">
+          <td class="col md-4">
+            <img class="img-thumbnail" [src]="campaign.game.imageURL" alt="no image found"/>
+          </td>
+          <td>{{campaign.name}}</td>
+          <td>{{campaign.storyteller.firstName}} {{campaign.storyteller.lastName}}</td>
+          <td>
+            <ul>
+              <li *ngFor="let player of campaign.players">{{player.firstName}} {{player.lastName}}</li>
+            </ul>
+          </td>
+          <td>
+            <button class="btn btn-danger" (click)="deleteCampaign(campaign.id)">Remove</button>
+            <button class="btn btn-warning" (click)="displayCampaign(campaign)">Details</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="selected && !editCampaign">
+    <h2>Campaign Details</h2>
+    <ul>
+      <li><strong>ID:</strong> {{ selected.id }}</li>
+      <li><strong>Name:</strong> {{ selected.name }}</li>
+      <li><strong>Storyteller:</strong> {{selected.storyteller.firstName}} {{selected.storyteller.lastName}}</li>
+      <li><strong>Players:</strong>
+        <ul>
+          <li *ngFor="let player of selected.players">{{player.firstName}} {{player.lastName}}</li>
+        </ul>
+      </li>
+      <button class="btn btn-warning" (click)="setEditCampaign()">Edit</button>
+      <button class="btn btn-primary" (click)="displayTable()">Back to List</button>
+    </ul>
+  </div>
+  <div *ngIf="editCampaign">
+    <h2>Edit Campaign</h2>
+    <form class="input-group">
+      <ul>
+        <li>
+          <label class="form-label strong" for="editTask">Name: </label>
+          <input type="text" id="editTask" [(ngModel)]="editCampaign.name" name="editTask" />
+        </li>
+        <li>
+          <label class="form-label strong" for="editDescription">Storyteller: </label>
+          <input type="text" id="editDescription" [(ngModel)]="editCampaign.storyteller" name="editDescription" />
+        </li>
+        <li>
+          <label class="form-label strong" for="editCompleted">Players: </label>
+          <input type="checkbox" id="editCompleted" [(ngModel)]="editCampaign.players" name="editCompleted" />
+        </li>
+      </ul>
+    </form>
+    <div>
+      <button type="button" class="btn btn-warning" (click)="updateCampaign(editCampaign)">Save</button>
+      <button type="button" class="btn btn-primary" (click)="cancelEdit()">Cancel</button>
+    </div>
+  </div>
+
+</div>

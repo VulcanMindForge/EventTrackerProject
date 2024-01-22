@@ -1,0 +1,108 @@
+
+<div class = "container">
+  <h1>Adventurers</h1>
+  <div class = "m-2 p-2"  *ngIf="!selected">
+    <table class="table table-dark table-striped table-hover">
+      <thead>
+        <tr>
+          <td><strong>Game</strong></td>
+          <td><strong>Name</strong></td>
+          <td><strong>Class</strong></td>
+          <td><strong>Level</strong></td>
+          <td><strong>Player</strong></td>
+          <td><strong>Campaign</strong></td>
+          <td><strong>Actions</strong></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let adventurer of adventurers" (click)="displayAdventurer(adventurer)">
+          <td class="col md-4">
+            <img class="img-thumbnail" [src]="adventurer.campaign?.game?.imageURL" alt="no image found"/>
+          </td>
+          <td>{{adventurer.name}}</td>
+          <td>{{adventurer.characterClass}}</td>
+          <td>{{adventurer.level}}</td>
+          <td>{{adventurer.player?.firstName}} {{adventurer.player?.lastName}}</td>
+          <td>{{adventurer.campaign?.name}}</td>
+          <td>
+            <button class="btn btn-warning" (click)="displayAdventurer(adventurer)">Details</button>
+            <button class="btn btn-danger" (click)="deleteAdventurer(adventurer.id)">Remove</button>
+          </td>
+        </tr>
+        <tr class="text-center">
+          <td colspan="7"><button class="btn btn-danger" (click)="addAdventurerToggle()">Add Adventurer</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="selected && !editAdventurer">
+    <h2>Campaign Details</h2>
+    <ul>
+      <li><strong>ID:</strong> {{ selected.id }}</li>
+      <li><strong>Name:</strong> {{ selected.name }}</li>
+      <li><strong>Class:</strong> {{selected.characterClass}}</li>
+      <li><strong>Level:</strong> {{selected.level}}</li>
+      <li><strong>Player:</strong> {{selected.player?.firstName}} {{selected.player?.lastName}}</li>
+
+      <button class="btn btn-warning" (click)="setEditAdventurer()">Edit</button>
+      <button class="btn btn-primary" (click)="displayTable()">Back to List</button>
+    </ul>
+  </div>
+  <div *ngIf="editAdventurer">
+    <h2>Edit Adventurer</h2>
+    <form id="adventurerForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" [(ngModel)]="editAdventurer.name" required>
+      <br>
+      <label for="characterClass">Character Class:</label>
+      <input type="text" id="characterClass" name="characterClass" [(ngModel)]="editAdventurer.characterClass">
+      <br>
+      <label for="level">Level:</label>
+      <input type="number" id="level" name="level" [(ngModel)]="editAdventurer.level">
+      <br>
+      <label for="player">Player:</label>
+      <input type="text" id="player" name="player" [(ngModel)]="editAdventurer.player.firstName + ' ' + editAdventurer.player.lastName" disabled="true">
+      <br>
+      <label for="campaign">Campaign:</label>
+      <br>
+      <select type="text" id="campaign" name="campaign" [(ngModel)]="editAdventurer.campaign">
+        <option *ngFor="let campaign of campaigns" [ngValue]="campaign">{{campaign.name}}</option>
+      </select>
+      <br>
+      <div>
+        <button type="button" class="btn btn-warning" (click)="updateAdventurer(editAdventurer)">Save</button>
+        <button type="button" class="btn btn-primary" (click)="cancelEdit()">Cancel</button>
+      </div>
+  </form>
+  </div>
+
+  <div *ngIf="addAdventurerDisplay">
+    <h2>Create Adventurer</h2>
+    <form id="adventurerForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" [(ngModel)]="newAdventurer.name" required>
+      <br>
+      <label for="characterClass">Character Class:</label>
+      <input type="text" id="characterClass" name="characterClass" [(ngModel)]="newAdventurer.characterClass">
+      <br>
+      <label for="level">Level:</label>
+      <input type="number" id="level" name="level" [(ngModel)]="newAdventurer.level">
+      <br>
+      <label for="player">Player:</label>
+      <select type="text" id="player" name="player" [(ngModel)]="newAdventurer.player">
+        <option *ngFor="let player of players" [ngValue]="player">{{player.firstName}} {{player.lastName}}</option>
+      </select>
+      <br>
+      <label for="campaign">Campaign:</label>
+      <br>
+      <select type="text" id="campaign" name="campaign" [(ngModel)]="newAdventurer.campaign">
+        <option *ngFor="let campaign of campaigns" [ngValue]="campaign">{{campaign.name}}</option>
+      </select>
+      <br>
+      <button class="btn btn-primary" type="button" (click)="addAdventurer()">Create Adventurer</button>
+      <button class="btn btn-warning" type="button" (click)="addAdventurerToggle()">Back to List</button>
+  </form>
+  </div>
+
+</div>
